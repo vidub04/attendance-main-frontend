@@ -1,0 +1,81 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    height: 100vh;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+.hero-card {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 50px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+    max-width: 700px;
+    width: 100%;
+}
+
+h1 {
+    margin: 0;
+    font-size: 32px;
+    color: #2c3e50;
+}
+
+.subtitle {
+    margin-top: 10px;
+    margin-bottom: 40px;
+    color: #555;
+    font-size: 16px;
+}
+
+.card-container {
+    display: flex;
+    gap: 25px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.dashboard-card {
+    text-decoration: none;
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    width: 260px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+    transition: 0.3s ease;
+    color: #2c3e50;
+}
+
+.dashboard-card h2 {
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.dashboard-card p {
+    font-size: 14px;
+    color: #666;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+}
+
+/* Optional color accents */
+.teacher {
+    border-top: 5px solid #3498db;
+}
+
+.student {
+    border-top: 5px solid #9b59b6;
+}
