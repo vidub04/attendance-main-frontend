@@ -43,6 +43,8 @@ window.onload = loadData;
 
 
 async function loadStudentsTable() {
+    console.log("Loading students...");
+
     const response = await fetch(`${API}/students`);
     const students = await response.json();
 
