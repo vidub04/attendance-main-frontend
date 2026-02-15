@@ -97,40 +97,32 @@ async function addSubject() {
 /*add student */
 
 async function addStudent() {
-    const name = document.getElementById("studentName").value;
+    const studentName = document.getElementById("studentName").value;
 
-    if (!name) {
-        alert("Please enter student name");
+    if (!studentName) {
+        alert("Enter student name");
         return;
     }
 
     try {
-        const response = await fetch("https://backend-mz6c.onrender.com/students", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                name: name
-            })
-        });
+        const response = await fetch(
+            `https://backend-mz6c.onrender.com/subjects?name=${studentName}`,
+            {
+                method: "POST"
+            }
+        );
 
         if (!response.ok) {
             throw new Error("Failed to add student");
         }
 
-        document.getElementById("studentMessage").innerHTML =
-            "✅ Student added successfully";
-
+        alert("Student added successfully!");
         document.getElementById("studentName").value = "";
-
-        // Reload student list in table
         loadStudents();
 
     } catch (error) {
         console.error(error);
-        document.getElementById("studentMessage").innerHTML =
-            "❌ Error adding student";
+        alert("Error adding student");
     }
 }
 
