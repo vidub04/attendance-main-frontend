@@ -1,34 +1,19 @@
 const API = "https://backend-mz6c.onrender.com";
 
-/* ================= LOAD STUDENTS & SUBJECTS ================= */
-
-async function loadData() {
-    await loadStudents();
-    await loadSubjects();
-}
-
-async function loadStudents() {
-    const response = await fetch(`${API}/students`);
-    const students = await response.json();
-
-    const select = document.getElementById("studentSelect");
-    select.innerHTML = "";
-
-    students.forEach(student => {
-        select.innerHTML += `
-            <option value="${student.id}">
-                ${student.name}
-            </option>
-        `;
-    });
-}
+/* ================= LOAD SUBJECTS ================= */
 
 async function loadSubjects() {
     const response = await fetch(`${API}/subjects`);
     const subjects = await response.json();
 
     const select = document.getElementById("subjectSelect");
-    select.innerHTML = "";
+
+    if (!select) {
+        console.error("subjectSelect not found in HTML");
+        return;
+    }
+
+    select.innerHTML = `<option value="">Select Subject</option>`;
 
     subjects.forEach(subject => {
         select.innerHTML += `
@@ -39,16 +24,23 @@ async function loadSubjects() {
     });
 }
 
-window.onload = loadData;
-
+/* ================= LOAD STUDENTS TABLE ================= */
 
 async function loadStudentsTable() {
-    console.log("Loading students...");
+    const subjectId = document.getElementById("subjectSelect").value;
+
+    if (!subjectId) return;
 
     const response = await fetch(`${API}/students`);
     const students = await response.json();
 
     const tbody = document.querySelector("#attendanceTable tbody");
+
+    if (!tbody) {
+        console.error("attendanceTable tbody not found");
+        return;
+    }
+
     tbody.innerHTML = "";
 
     students.forEach(student => {
@@ -70,79 +62,7 @@ async function loadStudentsTable() {
     });
 }
 
-
-
-/* ================= ADD SUBJECT ================= */
-
-async function addSubject() {
-    const name = document.getElementById("subjectName").value;
-
-    if (!name) {
-        alert("Enter subject name");
-        return;
-    }
-
-    await fetch(`${API}/subjects?name=${name}`, {
-        method: "POST"
-    });
-
-    document.getElementById("subjectMessage").innerHTML =
-        "<p>Subject added successfully ✅</p>";
-
-    document.getElementById("subjectName").value = "";
-    loadSubjects();
-}
-
-
-/* ================= ADD STUDENT ================= */
-
-async function addStudent() {
-    const name = document.getElementById("studentName").value;
-
-    if (!name) {
-        alert("Enter student name");
-        return;
-    }
-
-    await fetch(`${API}/students?name=${name}`, {
-        method: "POST"
-    });
-
-    document.getElementById("studentMessage").innerHTML =
-        "<p>Student added successfully ✅</p>";
-
-    document.getElementById("studentName").value = "";
-    loadStudents();
-}
-
-
-/* ================= MARK ATTENDANCE ================= */
-
-async function markAttendance() {
-    const studentId = document.getElementById("studentSelect").value;
-    const subjectId = document.getElementById("subjectSelect").value;
-    const status = document.getElementById("statusSelect").value;
-
-    if (!studentId || !subjectId) {
-        alert("Select student and subject");
-        return;
-    }
-
-    const response = await fetch(
-        `${API}/attendance?student_id=${studentId}&subject_id=${subjectId}&status=${status}`,
-        {
-            method: "POST"
-        }
-    );
-
-    if (!response.ok) {
-        alert("Failed to mark attendance ❌");
-        return;
-    }
-
-    document.getElementById("attendanceMessage").innerHTML =
-        "<p>Attendance marked successfully ✅</p>";
-}
+/* ================= SUBMIT ATTENDANCE ================= */
 
 async function submitAttendance() {
     const subjectId = document.getElementById("subjectSelect").value;
@@ -172,5 +92,6 @@ async function submitAttendance() {
         "<p>Attendance submitted successfully ✅</p>";
 }
 
+/* ================= LOAD ON PAGE START ================= */
 
-
+window.onload = loadSubjects;
