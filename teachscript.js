@@ -63,24 +63,36 @@ async function loadStudentsTable() {
 
 /*add subject */
 
-function addSubject() {
+async function addSubject() {
     const subjectName = document.getElementById("subjectName").value;
 
-    fetch("https://backend-mz6c.onrender.com/subjects", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            name: subjectName
-        })
-    })
-    .then(res => res.json())
-    .then(data => {
+    if (!subjectName) {
+        alert("Enter subject name");
+        return;
+    }
+
+    try {
+        const response = await fetch(
+            `https://backend-mz6c.onrender.com/subjects?name=${subjectName}`,
+            {
+                method: "POST"
+            }
+        );
+
+        if (!response.ok) {
+            throw new Error("Failed to add subject");
+        }
+
         alert("Subject added successfully!");
-    })
-    .catch(error => console.error(error));
+        document.getElementById("subjectName").value = "";
+        loadSubjects();
+
+    } catch (error) {
+        console.error(error);
+        alert("Error adding subject");
+    }
 }
+
 
 /*add student */
 
