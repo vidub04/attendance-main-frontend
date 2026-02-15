@@ -97,16 +97,17 @@ async function addSubject() {
 /*add student */
 
 async function addStudent() {
-    const studentName = document.getElementById("studentName").value;
+    const name = document.getElementById("studentName").value;
+    const email = document.getElementById("studentEmail").value;
 
-    if (!studentName) {
-        alert("Enter student name");
+    if (!name || !email) {
+        alert("Please enter both name and email");
         return;
     }
 
     try {
         const response = await fetch(
-            `https://backend-mz6c.onrender.com/students?name=${studentName}`,
+            `https://backend-mz6c.onrender.com/students?name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}`,
             {
                 method: "POST"
             }
@@ -116,15 +117,21 @@ async function addStudent() {
             throw new Error("Failed to add student");
         }
 
-        alert("Student added successfully!");
+        document.getElementById("studentMessage").innerHTML =
+            "✅ Student added successfully";
+
         document.getElementById("studentName").value = "";
+        document.getElementById("studentEmail").value = "";
+
         loadStudents();
 
     } catch (error) {
         console.error(error);
-        alert("Error adding student");
+        document.getElementById("studentMessage").innerHTML =
+            "❌ Error adding student";
     }
 }
+
 
 
 
