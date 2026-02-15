@@ -1,4 +1,4 @@
-const API = "https://YOUR_BACKEND_URL.onrender.com";
+const API = "https://backend-mz6c.onrender.com";
 
 // Add Student
 async function addStudent() {
