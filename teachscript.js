@@ -5,7 +5,6 @@ const API = "https://backend-mz6c.onrender.com";
 async function loadSubjects() {
     const response = await fetch(`${API}/subjects`);
     const subjects = await response.json();
-
     const select = document.getElementById("subjectSelect");
 
     if (!select) {
