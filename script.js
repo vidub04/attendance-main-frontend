@@ -1,5 +1,7 @@
 const API = "https://backend-mz6c.onrender.com";
 
+/* ================= SUBJECT-WISE ================= */
+
 async function getSubjectWise() {
     const id = document.getElementById("studentIdInput").value;
 
@@ -36,6 +38,7 @@ async function getSubjectWise() {
 }
 
 
+/* ================= OVERALL ================= */
 
 async function getOverall() {
     const id = document.getElementById("studentIdInput").value;
@@ -66,10 +69,10 @@ async function getOverall() {
     `;
 }
 
+
+/* ================= CLEAR RESULTS ON INPUT CHANGE ================= */
+
 document.getElementById("studentIdInput").addEventListener("input", () => {
     document.getElementById("overallResult").innerHTML = "";
     document.getElementById("subjectResult").innerHTML = "";
 });
-
-
-
