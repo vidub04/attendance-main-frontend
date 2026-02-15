@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Teacher Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>Teacher Dashboard</h1>
+
+    <h3>Add Subject</h3>
+    <input type="text" id="subjectName" placeholder="Subject Name">
+    <button onclick="addSubject()">Add</button>
+
+    <h3>Mark Attendance</h3>
+    <input type="number" id="subjectId" placeholder="Subject ID">
+    <select id="status">
+        <option value="present">Present</option>
+        <option value="absent">Absent</option>
+    </select>
+    <button onclick="markAttendance()">Submit</button>
+
+    <br><br>
+    <a href="index.html">Back</a>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

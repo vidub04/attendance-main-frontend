@@ -1,70 +1,29 @@
 const API = "https://backend-mz6c.onrender.com";
 
-// Add Student
-async function addStudent() {
-    const name = document.getElementById("studentName").value;
-    const email = document.getElementById("studentEmail").value;
-
-    const res = await fetch(`${API}/students?name=${name}&email=${email}`, {
-        method: "POST"
-    });
-
-    alert("Student Added");
-}
-
-// Add Subject
-async function addSubject() {
-    const name = document.getElementById("subjectName").value;
-
-    const res = await fetch(`${API}/subjects?name=${name}`, {
-        method: "POST"
-    });
-
-    alert("Subject Added");
-}
-
-// Mark Attendance
-async function markAttendance() {
-    const studentId = document.getElementById("studentId").value;
-    const subjectId = document.getElementById("subjectId").value;
-    const status = document.getElementById("status").value;
-
-    await fetch(`${API}/attendance?student_id=${studentId}&subject_id=${subjectId}&status=${status}`, {
-        method: "POST"
-    });
-
-    alert("Attendance Marked");
-}
-
-// Subject Wise
 async function getSubjectWise() {
-    const id = document.getElementById("viewStudentId").value;
+    const id = document.getElementById("viewSubjectId").value;
 
-    const res = await fetch(`${API}/attendance/subjectwise/${id}`);
-    const data = await res.json();
+    const response = await fetch(`${API}/attendance/subjectwise/${id}`);
+    const data = await response.json();
 
-    document.getElementById("output").innerText =
-        JSON.stringify(data, null, 2);
+    document.getElementById("subjectResult").innerHTML = `
+        <div class="card">
+            <p><strong>Total Classes:</strong> ${data.total_classes}</p>
+            <p><strong>Present:</strong> ${data.present}</p>
+            <p><strong>Percentage:</strong> ${data.percentage}%</p>
+            <p><strong>Status:</strong> ${data.safe ? "Safe ✅" : "Below 75% ⚠️"}</p>
+        </div>
+    `;
 }
 
-// Overall
 async function getOverall() {
-    const id = document.getElementById("viewStudentId").value;
+    const response = await fetch(`${API}/attendance/overall`);
+    const data = await response.json();
 
-    const res = await fetch(`${API}/attendance/overall/${id}`);
-    const data = await res.json();
-
-    document.getElementById("output").innerText =
-        JSON.stringify(data, null, 2);
-}
-
-// AI Advice
-async function getAdvice() {
-    const id = document.getElementById("viewStudentId").value;
-
-    const res = await fetch(`${API}/ai/advice/${id}`);
-    const data = await res.json();
-
-    document.getElementById("output").innerText =
-        JSON.stringify(data, null, 2);
+    document.getElementById("overallResult").innerHTML = `
+        <div class="card">
+            <p><strong>Overall Percentage:</strong> ${data.overall_percentage}%</p>
+            <p><strong>Status:</strong> ${data.safe ? "Safe ✅" : "Below 75% ⚠️"}</p>
+        </div>
+    `;
 }

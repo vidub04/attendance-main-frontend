@@ -1,55 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Smart Attendance System</title>
+    <title>Attendance System</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="container">
+        <h1>Smart Attendance System</h1>
 
-<h1>Smart Attendance Dashboard</h1>
+        <div class="card-container">
+            <a href="teacher.html" class="card">
+                <h2>Teacher Dashboard</h2>
+            </a>
 
-<div class="container">
-
-    <!-- Add Student -->
-    <div class="card">
-        <h2>Add Student</h2>
-        <input id="studentName" placeholder="Name">
-        <input id="studentEmail" placeholder="Email">
-        <button onclick="addStudent()">Add Student</button>
+            <a href="student.html" class="card">
+                <h2>Student Dashboard</h2>
+            </a>
+        </div>
     </div>
-
-    <!-- Add Subject -->
-    <div class="card">
-        <h2>Add Subject</h2>
-        <input id="subjectName" placeholder="Subject Name">
-        <button onclick="addSubject()">Add Subject</button>
-    </div>
-
-    <!-- Mark Attendance -->
-    <div class="card">
-        <h2>Mark Attendance</h2>
-        <input id="studentId" placeholder="Student ID">
-        <input id="subjectId" placeholder="Subject ID">
-        <select id="status">
-            <option value="present">Present</option>
-            <option value="absent">Absent</option>
-        </select>
-        <button onclick="markAttendance()">Submit</button>
-    </div>
-
-    <!-- View Attendance -->
-    <div class="card">
-        <h2>View Attendance</h2>
-        <input id="viewStudentId" placeholder="Student ID">
-        <button onclick="getSubjectWise()">Subject Wise</button>
-        <button onclick="getOverall()">Overall</button>
-        <button onclick="getAdvice()">AI Advice</button>
-
-        <pre id="output"></pre>
-    </div>
-
-</div>
-
-<script src="script.js"></script>
 </body>
 </html>
