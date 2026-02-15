@@ -61,6 +61,68 @@ async function loadStudentsTable() {
     });
 }
 
+/*add subject */
+
+function addSubject() {
+    const subjectName = document.getElementById("subjectName").value;
+
+    fetch("https://backend-mz6c.onrender.com/subjects", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            name: subjectName
+        })
+    })
+    .then(res => res.json())
+    .then(data => {
+        alert("Subject added successfully!");
+    })
+    .catch(error => console.error(error));
+}
+
+/*add student */
+
+async function addStudent() {
+    const name = document.getElementById("studentName").value;
+
+    if (!name) {
+        alert("Please enter student name");
+        return;
+    }
+
+    try {
+        const response = await fetch("https://backend-mz6c.onrender.com/students", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                name: name
+            })
+        });
+
+        if (!response.ok) {
+            throw new Error("Failed to add student");
+        }
+
+        document.getElementById("studentMessage").innerHTML =
+            "✅ Student added successfully";
+
+        document.getElementById("studentName").value = "";
+
+        // Reload student list in table
+        loadStudents();
+
+    } catch (error) {
+        console.error(error);
+        document.getElementById("studentMessage").innerHTML =
+            "❌ Error adding student";
+    }
+}
+
+
 /* ================= SUBMIT ATTENDANCE ================= */
 
 async function submitAttendance() {
