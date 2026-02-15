@@ -98,18 +98,19 @@ async function markAttendance() {
         return;
     }
 
-    await fetch(`${API}/attendance`, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            student_id: parseInt(studentId),
-            subject_id: parseInt(subjectId),
-            status: status
-        })
-    });
+    const response = await fetch(
+        `${API}/attendance?student_id=${studentId}&subject_id=${subjectId}&status=${status}`,
+        {
+            method: "POST"
+        }
+    );
+
+    if (!response.ok) {
+        alert("Failed to mark attendance ❌");
+        return;
+    }
 
     document.getElementById("attendanceMessage").innerHTML =
         "<p>Attendance marked successfully ✅</p>";
 }
+
