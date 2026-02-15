@@ -6,15 +6,23 @@ async function getSubjectWise() {
     const response = await fetch(`${API}/attendance/subjectwise/${id}`);
     const data = await response.json();
 
-    document.getElementById("subjectResult").innerHTML = `
-        <div class="card">
-            <p><strong>Total Classes:</strong> ${data.total_classes}</p>
-            <p><strong>Present:</strong> ${data.present}</p>
-            <p><strong>Percentage:</strong> ${data.percentage}%</p>
-            <p><strong>Status:</strong> ${data.safe ? "Safe ✅" : "Below 75% ⚠️"}</p>
-        </div>
-    `;
+    let output = `<h3>Student: ${data.student_name}</h3>`;
+
+    data.subjects.forEach(subject => {
+        output += `
+            <div class="card">
+                <p><strong>Subject:</strong> ${subject.subject_name}</p>
+                <p><strong>Total Classes:</strong> ${subject.total_classes}</p>
+                <p><strong>Present:</strong> ${subject.present}</p>
+                <p><strong>Percentage:</strong> ${subject.percentage}%</p>
+                <p><strong>Status:</strong> ${subject.safe ? "Safe ✅" : "Below 75% ⚠️"}</p>
+            </div>
+        `;
+    });
+
+    document.getElementById("subjectResult").innerHTML = output;
 }
+
 
 async function getOverall() {
     const response = await fetch(`${API}/attendance/overall`);
