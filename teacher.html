@@ -2,29 +2,50 @@
 <html>
 <head>
     <title>Teacher Dashboard</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="teacherdec.css">
 </head>
 <body>
 
 <div class="container">
     <h1>Teacher Dashboard</h1>
 
-    <h3>Add Subject</h3>
-    <input type="text" id="subjectName" placeholder="Subject Name">
-    <button onclick="addSubject()">Add</button>
+    <!-- Add Subject Section -->
+    <div class="card">
+        <h2>Add New Subject</h2>
+        <input type="text" id="subjectName" placeholder="Enter Subject Name">
+        <button onclick="addSubject()">Add Subject</button>
+        <div id="subjectMessage"></div>
+    </div>
 
-    <h3>Mark Attendance</h3>
-    <input type="number" id="subjectId" placeholder="Subject ID">
-    <select id="status">
-        <option value="present">Present</option>
-        <option value="absent">Absent</option>
-    </select>
-    <button onclick="markAttendance()">Submit</button>
+    <!-- Add Student Section -->
+    <div class="card">
+        <h2>Add New Student</h2>
+        <input type="text" id="studentName" placeholder="Enter Student Name">
+        <button onclick="addStudent()">Add Student</button>
+        <div id="studentMessage"></div>
+    </div>
 
-    <br><br>
-    <a href="index.html">Back</a>
+    <!-- Mark Attendance Section -->
+    <div class="card">
+        <h2>Mark Attendance</h2>
+
+        <label>Select Subject:</label>
+        <select id="subjectSelect"></select>
+
+        <label>Select Student:</label>
+        <select id="studentSelect"></select>
+
+        <label>Status:</label>
+        <select id="statusSelect">
+            <option value="present">Present</option>
+            <option value="absent">Absent</option>
+        </select>
+
+        <button onclick="markAttendance()">Mark Attendance</button>
+        <div id="attendanceMessage"></div>
+    </div>
 </div>
 
-<script src="script.js"></script>
+<script src="teachscript.js"></script>
 </body>
 </html>
