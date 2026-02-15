@@ -6,27 +6,22 @@
 </head>
 <body>
 
-<div class="container">
-    <h1>Student Dashboard</h1>
+<div class="dashboard">
 
-    <
+    <div class="top-card">
+        <h1>Student Attendance Dashboard</h1>
 
-    <h3>Enter Student ID</h3>
+        <div class="input-section">
+            <input type="number" id="studentIdInput" placeholder="Enter Student ID">
+            <button onclick="getOverall()">View Overall</button>
+            <button onclick="getSubjectWise()">View Subject-wise</button>
+        </div>
+    </div>
 
-<input type="number" id="studentIdInput" placeholder="Enter your ID">
+    <div id="overallResult" class="section"></div>
 
-<br><br>
+    <div id="subjectResult" class="section grid"></div>
 
-<button onclick="getOverall()">View Overall Attendance</button>
-<button onclick="getSubjectWise()">View Subject-wise Attendance</button>
-
-<div id="overallResult"></div>
-<div id="subjectResult"></div>
-
-
-
-    <br><br>
-    <a href="index.html">Back</a>
 </div>
 
 <script src="script.js"></script>

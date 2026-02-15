@@ -24,14 +24,17 @@ async function getSubjectWise() {
 
     data.subjects.forEach(subject => {
         output += `
-            <div class="card">
-                <p><strong>Subject:</strong> ${subject.subject_name}</p>
-                <p>Total Classes: ${subject.total_classes}</p>
-                <p>Present: ${subject.present}</p>
-                <p>Percentage: ${subject.percentage}%</p>
-                <p>${subject.safe ? "Safe ✅" : "Below 75% ⚠️"}</p>
-            </div>
-        `;
+        <div class="card">
+        <h3>${subject.subject_name}</h3>
+        <p>Total Classes: ${subject.total_classes}</p>
+        <p>Present: ${subject.present}</p>
+        <p>Attendance: ${subject.percentage}%</p>
+        <p class="${subject.safe ? "safe" : "warning"}">
+            ${subject.safe ? "Safe ✅" : "Below 75% ⚠️"}
+        </p>
+    </div>
+`;
+
     });
 
     document.getElementById("subjectResult").innerHTML = output;
@@ -59,14 +62,17 @@ async function getOverall() {
     const data = await response.json();
 
     document.getElementById("overallResult").innerHTML = `
-        <div class="card">
-            <h3>${data.student_name}</h3>
-            <p><strong>Total Classes:</strong> ${data.total_classes}</p>
-            <p><strong>Present:</strong> ${data.present}</p>
-            <p><strong>Overall Percentage:</strong> ${data.overall_percentage}%</p>
-            <p><strong>Status:</strong> ${data.safe ? "Safe ✅" : "Below 75% ⚠️"}</p>
-        </div>
-    `;
+    <div class="card">
+        <h3>${data.student_name}</h3>
+        <p>Total Classes: ${data.total_classes}</p>
+        <p>Present: ${data.present}</p>
+        <p>Overall Attendance: ${data.overall_percentage}%</p>
+        <p class="${data.safe ? "safe" : "warning"}">
+            ${data.safe ? "Safe ✅" : "Below 75% ⚠️"}
+        </p>
+    </div>
+`;
+
 }
 
 
