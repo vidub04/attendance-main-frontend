@@ -42,6 +42,34 @@ async function loadSubjects() {
 window.onload = loadData;
 
 
+async function loadStudentsTable() {
+    const response = await fetch(`${API}/students`);
+    const students = await response.json();
+
+    const tbody = document.querySelector("#attendanceTable tbody");
+    tbody.innerHTML = "";
+
+    students.forEach(student => {
+        tbody.innerHTML += `
+            <tr>
+                <td>${student.name}</td>
+                <td>
+                    <input type="radio" 
+                           name="attendance_${student.id}" 
+                           value="present">
+                </td>
+                <td>
+                    <input type="radio" 
+                           name="attendance_${student.id}" 
+                           value="absent">
+                </td>
+            </tr>
+        `;
+    });
+}
+
+
+
 /* ================= ADD SUBJECT ================= */
 
 async function addSubject() {
@@ -113,5 +141,34 @@ async function markAttendance() {
     document.getElementById("attendanceMessage").innerHTML =
         "<p>Attendance marked successfully ✅</p>";
 }
+
+async function submitAttendance() {
+    const subjectId = document.getElementById("subjectSelect").value;
+
+    if (!subjectId) {
+        alert("Select subject first");
+        return;
+    }
+
+    const response = await fetch(`${API}/students`);
+    const students = await response.json();
+
+    for (let student of students) {
+        const selected = document.querySelector(
+            `input[name="attendance_${student.id}"]:checked`
+        );
+
+        if (selected) {
+            await fetch(
+                `${API}/attendance?student_id=${student.id}&subject_id=${subjectId}&status=${selected.value}`,
+                { method: "POST" }
+            );
+        }
+    }
+
+    document.getElementById("attendanceMessage").innerHTML =
+        "<p>Attendance submitted successfully ✅</p>";
+}
+
 
 

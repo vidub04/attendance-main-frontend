@@ -25,25 +25,32 @@
         <div id="studentMessage"></div>
     </div>
 
-    <!-- Mark Attendance Section -->
     <div class="card">
-        <h2>Mark Attendance</h2>
+    <h2>Mark Attendance</h2>
 
-        <label>Select Subject:</label>
-        <select id="subjectSelect"></select>
+    <label>Select Subject:</label>
+    <select id="subjectSelect" onchange="loadStudentsTable()"></select>
 
-        <label>Select Student:</label>
-        <select id="studentSelect"></select>
+    <br><br>
 
-        <label>Status:</label>
-        <select id="statusSelect">
-            <option value="present">Present</option>
-            <option value="absent">Absent</option>
-        </select>
+    <table id="attendanceTable">
+        <thead>
+            <tr>
+                <th>Student Name</th>
+                <th>Present</th>
+                <th>Absent</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
 
-        <button onclick="markAttendance()">Mark Attendance</button>
-        <div id="attendanceMessage"></div>
-    </div>
+    <br>
+
+    <button onclick="submitAttendance()">Submit Attendance</button>
+
+    <div id="attendanceMessage"></div>
+</div>
+
 </div>
 
 <script src="teachscript.js"></script>
