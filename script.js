@@ -25,13 +25,19 @@ async function getSubjectWise() {
 
 
 async function getOverall() {
-    const response = await fetch(`${API}/attendance/overall`);
+    const id = document.getElementById("viewSubjectId").value;
+
+    const response = await fetch(`${API}/attendance/overall/${id}`);
     const data = await response.json();
 
     document.getElementById("overallResult").innerHTML = `
         <div class="card">
+            <h3>${data.student_name}</h3>
+            <p><strong>Total Classes:</strong> ${data.total_classes}</p>
+            <p><strong>Present:</strong> ${data.present}</p>
             <p><strong>Overall Percentage:</strong> ${data.overall_percentage}%</p>
             <p><strong>Status:</strong> ${data.safe ? "Safe ✅" : "Below 75% ⚠️"}</p>
         </div>
     `;
 }
+
