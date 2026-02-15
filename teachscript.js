@@ -123,7 +123,8 @@ async function addStudent() {
         document.getElementById("studentName").value = "";
         document.getElementById("studentEmail").value = "";
 
-        loadStudents();
+        loadStudentsTable();
+
 
     } catch (error) {
         console.error(error);
