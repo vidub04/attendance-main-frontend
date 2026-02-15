@@ -106,7 +106,7 @@ async function addStudent() {
 
     try {
         const response = await fetch(
-            `https://backend-mz6c.onrender.com/subjects?name=${studentName}`,
+            `https://backend-mz6c.onrender.com/students?name=${studentName}`,
             {
                 method: "POST"
             }
@@ -125,6 +125,7 @@ async function addStudent() {
         alert("Error adding student");
     }
 }
+
 
 
 /* ================= SUBMIT ATTENDANCE ================= */
