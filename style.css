@@ -1,8 +1,16 @@
 body {
     margin: 0;
     font-family: 'Segoe UI', sans-serif;
-    background: linear-gradient(135deg, #667eea, #764ba2);
+    background: linear-gradient(-45deg, #0F172A, #6b2f9c,#5632ab,#2a067d);
+    background-size: 400%,400%;
+    animation:darkMove 10s ease infinite;
     text-align: center;
+}
+
+@keyframes darkMove{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position: 0% 50%;}
 }
 
 .dashboard {
